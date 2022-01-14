@@ -1,5 +1,7 @@
 package kr.or.iei.member.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,18 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int memberWithDraw(String userId, String userPwd) {
 		return mDAO.memberWithDraw(userId, userPwd);
+		
+	}
+
+	@Override
+	public ArrayList<Member> memberAllList() {
+		return mDAO.memberAllList();
+		
+	}
+
+	@Override
+	public int withDrawChangeBtn(char endYN, int userNo) {
+		return mDAO.withDrawChange(endYN, userNo);
 		
 	}
 }

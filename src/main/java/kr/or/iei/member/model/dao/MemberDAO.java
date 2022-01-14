@@ -49,4 +49,18 @@ public class MemberDAO {
 		
 	}
 
+	public ArrayList<Member> memberAllList() {
+		String query = "select * from member";
+		
+		return new ArrayList<Member>(jdbc.query(query, new MemberRowMapper()));
+		
+	}
+
+	public int withDrawChange(char endYN, int userNo) {
+		String query = "update member set end_YN=? where userNo = ?";
+		
+		return jdbc.update(query, String.valueOf(endYN), userNo);		
+		
+	}
+
 }

@@ -1,6 +1,10 @@
 package kr.or.iei.member.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.iei.member.model.service.MemberService;
 import kr.or.iei.member.model.vo.Member;
@@ -80,6 +85,9 @@ public class MemberController {
 	@RequestMapping(value="/member/memberUpdate.do", method=RequestMethod.POST)
 	public String memberUpdate(HttpServletRequest request, @SessionAttribute Member member, Model model) {
 		
+		String uri = request.getRequestURI().toString();
+		System.out.println("["+uri+"] 정상호출" );
+		
 		
 		String userName = request.getParameter("userName");
 		int age = Integer.parseInt(request.getParameter("age"));
@@ -110,7 +118,7 @@ public class MemberController {
 		
 		String userPwd = request.getParameter("userPwd");
 		
-		System.out.println(userPwd);
+		
 		
 		if(userPwd == null) {
 			return "member/withDraw";	
@@ -140,8 +148,32 @@ public class MemberController {
 		
 		
 		return "member/msg";
+	}
+	
+	@RequestMapping(value="/member/memberAllList.do")
+	public ModelAndView memberAllList(ModelAndView mav) {
 		
+		ArrayList<Member> list = mService.memberAllList();
 		
+		mav.addObject("list", list );
 		
+		mav.setViewName("member/memberAllList");
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping(value="/member/withDrawChangeBtn.do",method=RequestMethod.GET)
+	public void withDrawChangeBtn(@RequestParam char endYN, @RequestParam int userNo,HttpServletResponse response) throws IOException {
+		
+		endYN = endYN == 'Y'?'N':'Y';
+		
+		int result = mService.withDrawChangeBtn(endYN, userNo);
+		
+		if(result>0) {
+			response.getWriter().print(endYN);
+		}else {
+			response.getWriter().print(false);
+		}
 	}
 }
