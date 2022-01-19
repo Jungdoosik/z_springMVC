@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository(value="mDAO")
+@Repository(value="fDAO")
 public class FileDAO {
 
 	@Autowired

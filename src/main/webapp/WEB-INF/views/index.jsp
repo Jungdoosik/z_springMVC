@@ -21,8 +21,8 @@
 		[${sessionScope.member.userName }]님 환영합니다.<a href="/member/logout.do">로그아웃</a><br>
 		<a href="/member/myPage.do">마이페이지</a><br>
 		<a href="/member/withDraw.do">회원탈퇴</a><br>
-		<a href="/member/memberAllList.do">전체 회원 목록</a>
-		<a href="/file/fileUploadPage.do">파일 업로드</a>
+		<a href="/member/memberAllList.do">전체 회원 목록</a><br>
+		<a href="/file/fileUploadPage.do">파일 업로드</a><br>
 	</c:when>
 	
 	<c:otherwise>

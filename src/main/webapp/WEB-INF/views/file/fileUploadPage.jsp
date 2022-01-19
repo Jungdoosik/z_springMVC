@@ -11,7 +11,7 @@
 
 <h1>파일 업로드</h1>
 
-<form action="/file/fileUpload.do">
+<form action="/file/fileUpload.do" method="post">
 	<input type="file" name="file"/>
 	<input type="submit" value="업로드"/>
 </form>
